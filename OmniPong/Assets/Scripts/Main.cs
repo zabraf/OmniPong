@@ -7,6 +7,7 @@ public class Main : MonoBehaviour
     public GameObject PaddleJ1;
     public GameObject PaddleJ2;
     public GameObject Ball;
+    public GameObject WallTop;
     // Start is called before the first frame update
     void Start()
     {
