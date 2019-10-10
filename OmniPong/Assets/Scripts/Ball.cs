@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Vector2 vitesse;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +34,42 @@ public class Ball : MonoBehaviour
         float rand = Random.Range(0, 2);
         if (rand < 1)
         {
-            rb.AddForce(new Vector2(20, -15));
+            vitesse = new Vector2(20, -15);
+            
         }
         else
         {
-            rb.AddForce(new Vector2(-20, -15));
+            vitesse =  new Vector2(-20, -15);
+        }
+        rb.AddForce(vitesse);
+    }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Wall")
+        {
+            rb.velocity = Vector3.zero;
+            vitesse = new Vector2(vitesse.x,-vitesse.y);
+            rb.AddForce(vitesse);
+            Debug.Log(vitesse.x);
+        } else if (col.gameObject.tag == "Goal")
+        {
+            RestartGame();
+        }else if(col.gameObject.tag == "Player")
+        {
+            rb.velocity = Vector3.zero;
+            if(vitesse.x < 0)
+            {
+                vitesse = new Vector2(-vitesse.x + 5, vitesse.y);
+            }
+            else
+            {
+                vitesse = new Vector2(-vitesse.x - 5, vitesse.y);
+            }
+          
+            Debug.Log(vitesse.x);
+            rb.AddForce(vitesse);
+
         }
     }
 }
