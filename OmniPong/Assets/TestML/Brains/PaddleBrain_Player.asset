@@ -10,16 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98a7240f8ec560d4786a031c3c86f08d, type: 3}
-  m_Name: Player
+  m_Name: PaddleBrain_Player
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 1
+    vectorObservationSize: 0
     numStackedVectorObservations: 1
-    vectorActionSize: 01000000
+    vectorActionSize: 03000000
     cameraResolutions: []
     vectorActionDescriptions:
-    - 
+    - Move
     vectorActionSpaceType: 0
-  keyContinuousPlayerActions: []
+  keyContinuousPlayerActions:
+  - key: 273
+    index: 0
+    value: 1
+  - key: 274
+    index: 0
+    value: 2
   axisContinuousPlayerActions: []
-  discretePlayerActions: []
+  discretePlayerActions:
+  - key: 273
+    branchIndex: 0
+    value: 1
+  - key: 274
+    branchIndex: 0
+    value: 2
