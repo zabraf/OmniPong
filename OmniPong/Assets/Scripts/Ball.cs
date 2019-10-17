@@ -45,13 +45,11 @@ public class Ball : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log(col.gameObject.tag);
         if (col.gameObject.tag == "Wall")
         {
             rb.velocity = Vector3.zero;
             vitesse = new Vector2(vitesse.x,-vitesse.y);
             rb.AddForce(vitesse);
-            Debug.Log(vitesse.x);
         } else if (col.gameObject.tag == "Goal")
         {
             RestartGame();
@@ -67,7 +65,6 @@ public class Ball : MonoBehaviour
                 vitesse = new Vector2(-vitesse.x - 5, vitesse.y);
             }
           
-            Debug.Log(vitesse.x);
             rb.AddForce(vitesse);
 
         }
