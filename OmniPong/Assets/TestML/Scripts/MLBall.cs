@@ -23,7 +23,7 @@ public class MLBall : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Col : " + col.gameObject.tag);
+        
         if (col.gameObject.tag == "Wall")
         {
             rb.velocity = new Vector2(velocity.x,-velocity.y);
@@ -34,13 +34,40 @@ public class MLBall : MonoBehaviour
         }
         else if(col.gameObject.tag == "Player")
         {
-            if(velocity.x < 0)
+            Vector2 newVelocity = velocity;
+            Vector2 ballPos = rb.transform.position;
+            Vector2 paddleCenter = col.transform.position;
+            
+            if (velocity.x < 0)
             {
-                rb.velocity = new Vector2(-velocity.x + speedIncrease, velocity.y);
+                paddleCenter.x += col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (ballPos.x > paddleCenter.x)
+                {
+                    newVelocity = new Vector2(-newVelocity.x + speedIncrease, newVelocity.y);
+                    newVelocity = new Vector2(newVelocity.x + (ballPos.x - paddleCenter.x), newVelocity.y + (ballPos.y - paddleCenter.y));
+                }
+                else
+                {
+                    newVelocity.y = -newVelocity.y;
+                }
+                rb.velocity = newVelocity;
             }
             else
             {
-                rb.velocity = new Vector2(-velocity.x - speedIncrease, velocity.y);
+                paddleCenter.x -= col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (ballPos.x < paddleCenter.x)
+                {
+                    newVelocity = new Vector2(-velocity.x - speedIncrease, velocity.y);
+                    newVelocity = new Vector2(newVelocity.x + (ballPos.x - paddleCenter.x), newVelocity.y + (ballPos.y - paddleCenter.y));
+                }
+                else
+                {
+                    newVelocity.y = -newVelocity.y;
+                }
+            
+                rb.velocity = newVelocity;
             }
         }
     }
