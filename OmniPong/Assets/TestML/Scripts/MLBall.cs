@@ -24,7 +24,7 @@ public class MLBall : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Col : " + col.gameObject.tag);
+        
         if (col.gameObject.tag == "Wall")
         {
             rb.velocity = new Vector2(velocity.x,-velocity.y);
@@ -35,17 +35,39 @@ public class MLBall : MonoBehaviour
         }
         else if(col.gameObject.tag == "Player")
         {
-            Vector2 newVelocity;
+            Vector2 newVelocity = velocity;
+            Vector2 ballPos = rb.transform.position;
+            Vector2 paddleCenter = col.transform.position;
+            
             if (velocity.x < 0)
             {
-                newVelocity = new Vector2(-velocity.x + speedIncrease, velocity.y);
-                newVelocity = new Vector2(newVelocity.x + (rb.transform.position.x - col.transform.position.x), newVelocity.y + (rb.transform.position.y - col.transform.position.y));
+                paddleCenter.x += col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (ballPos.x > paddleCenter.x)
+                {
+                    newVelocity = new Vector2(-newVelocity.x + speedIncrease, newVelocity.y);
+                    newVelocity = new Vector2(newVelocity.x + (ballPos.x - paddleCenter.x), newVelocity.y + (ballPos.y - paddleCenter.y));
+                }
+                else
+                {
+                    newVelocity.y = -newVelocity.y;
+                }
                 rb.velocity = newVelocity;
             }
             else
             {
-                newVelocity = new Vector2(-velocity.x - speedIncrease, velocity.y);
-                newVelocity = new Vector2(newVelocity.x + (rb.transform.position.x - col.transform.position.x), newVelocity.y + (rb.transform.position.y - col.transform.position.y));
+                paddleCenter.x -= col.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (ballPos.x < paddleCenter.x)
+                {
+                    newVelocity = new Vector2(-velocity.x - speedIncrease, velocity.y);
+                    newVelocity = new Vector2(newVelocity.x + (ballPos.x - paddleCenter.x), newVelocity.y + (ballPos.y - paddleCenter.y));
+                }
+                else
+                {
+                    newVelocity.y = -newVelocity.y;
+                }
+            
                 rb.velocity = newVelocity;
             }
         }

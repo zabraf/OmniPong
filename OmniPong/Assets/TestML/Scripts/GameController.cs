@@ -85,22 +85,22 @@ public class GameController : MonoBehaviour
         int rdm = UnityEngine.Random.Range(0,6);
         switch (rdm)
         {
-            case 1:
+            case 0:
                 angle = 0;
                 break;
-            case 2:
+            case 1:
                 angle = 45;
                 break;
-            case 3:
+            case 2:
                 angle = 135;
                 break;
-            case 4:
+            case 3:
                 angle = 180;
                 break;
-            case 5:
+            case 4:
                 angle = 225;
                 break;
-            case 6:
+            case 5:
                 angle = 315;
                 break;
             default:
