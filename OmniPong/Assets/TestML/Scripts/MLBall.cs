@@ -35,13 +35,18 @@ public class MLBall : MonoBehaviour
         }
         else if(col.gameObject.tag == "Player")
         {
-            if(velocity.x < 0)
+            Vector2 newVelocity;
+            if (velocity.x < 0)
             {
-                rb.velocity = new Vector2(-velocity.x + speedIncrease, velocity.y);
+                newVelocity = new Vector2(-velocity.x + speedIncrease, velocity.y);
+                newVelocity = new Vector2(newVelocity.x + (rb.transform.position.x - col.transform.position.x), newVelocity.y + (rb.transform.position.y - col.transform.position.y));
+                rb.velocity = newVelocity;
             }
             else
             {
-                rb.velocity = new Vector2(-velocity.x - speedIncrease, velocity.y);
+                newVelocity = new Vector2(-velocity.x - speedIncrease, velocity.y);
+                newVelocity = new Vector2(newVelocity.x + (rb.transform.position.x - col.transform.position.x), newVelocity.y + (rb.transform.position.y - col.transform.position.y));
+                rb.velocity = newVelocity;
             }
         }
     }

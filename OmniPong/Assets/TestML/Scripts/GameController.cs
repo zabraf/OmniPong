@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -81,16 +82,36 @@ public class GameController : MonoBehaviour
     {
         //find an angle that is not directly up or down
         float angle;
-        do
+        int rdm = UnityEngine.Random.Range(0,6);
+        switch (rdm)
         {
-            angle = Random.Range(0, 359.9f);
-        } while (angle == 90 || angle == 270);
-
+            case 1:
+                angle = 0;
+                break;
+            case 2:
+                angle = 45;
+                break;
+            case 3:
+                angle = 135;
+                break;
+            case 4:
+                angle = 180;
+                break;
+            case 5:
+                angle = 225;
+                break;
+            case 6:
+                angle = 315;
+                break;
+            default:
+                throw new Exception("Wrong RDM");
+                break;
+        }
         //wait for delay
         yield return new WaitForSeconds(delay);
 
         //apply new speed
-        ballRigidbody2D.velocity = new Vector2(Mathf.Cos(angle * ballStartSpeed), Mathf.Sin(angle * ballStartSpeed));
+        ballRigidbody2D.velocity = new Vector2(Mathf.Cos(angle) * ballStartSpeed, Mathf.Sin(angle) * ballStartSpeed);
     }
 
     /// <summary>
@@ -98,6 +119,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void ScoreGoal(GameObject paddle)
     {
+        Debug.Log(paddle);
         if(paddle == PaddleJ1)
         {
             scoreLeft++;
