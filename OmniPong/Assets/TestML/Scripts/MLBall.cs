@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MLBall : MonoBehaviour
 {
-    private GameController gameController;
+    public GameController gameController;
     private Rigidbody2D rb;
     public float speedIncrease = 2.5f;
     //used to keep the data of velocity before collision
@@ -14,7 +14,6 @@ public class MLBall : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        gameController = Camera.main.GetComponent<GameController>();
     }
 
     void FixedUpdate()

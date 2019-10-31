@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     public GameObject WallRight;
     public GameObject WallLeft;
 
+    public PaddleAgent AIAgent;
+
     public int scoreLeft = 0;
     public int scoreRight = 0;
 
@@ -96,17 +98,19 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// Score for a paddle
     /// </summary>
-    public void ScoreGoal(GameObject paddle)
+    public void ScoreGoal(GameObject goal)
     {
-        if(paddle == PaddleJ1)
+        if (goal == WallRight)
         {
             scoreLeft++;
+            AIAgent?.AddReward(-1);
             ResetWorld();
         }
-        else if(paddle == PaddleJ2)
+        else if (goal == WallLeft)
         {
-            ResetWorld();
             scoreRight++;
+            AIAgent?.AddReward(1);
+            ResetWorld();
         }
     }
 }
