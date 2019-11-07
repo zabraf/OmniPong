@@ -297,7 +297,7 @@ MonoBehaviour:
   AIAgent: {fileID: 1218580276}
   scoreLeft: 0
   scoreRight: 0
-  ballStartSpeed: 20
+  ballStartSpeed: 1
 --- !u!4 &185486402
 Transform:
   m_ObjectHideFlags: 0
@@ -462,7 +462,9 @@ MonoBehaviour:
   broadcastHub:
     broadcastingBrains:
     - {fileID: 11400000, guid: 66918de965ab79942b570483a1b0cd35, type: 2}
-    _brainsToControl: []
+    - {fileID: 11400000, guid: 9db1621dc152054478c1125045b160a5, type: 2}
+    _brainsToControl:
+    - {fileID: 11400000, guid: 9db1621dc152054478c1125045b160a5, type: 2}
   maxSteps: 0
   trainingConfiguration:
     width: 80
@@ -714,7 +716,7 @@ MonoBehaviour:
   keyUp: 119
   keyDown: 115
   movingDirection: 0
-  speed: 10
+  speed: 8
 --- !u!50 &1201394250
 Rigidbody2D:
   serializedVersion: 4
@@ -1075,7 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c43b326c1f3cb4592a0cbabf779e51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: 66918de965ab79942b570483a1b0cd35, type: 2}
+  brain: {fileID: 11400000, guid: 9db1621dc152054478c1125045b160a5, type: 2}
   agentParameters:
     agentCameras: []
     agentRenderTextures: []
@@ -1101,7 +1103,7 @@ MonoBehaviour:
   keyUp: 119
   keyDown: 115
   movingDirection: 0
-  speed: 10
+  speed: 8
 --- !u!1 &1284257089
 GameObject:
   m_ObjectHideFlags: 0
