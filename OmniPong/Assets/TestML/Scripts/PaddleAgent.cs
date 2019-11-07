@@ -36,7 +36,20 @@ public class PaddleAgent : Agent
         float ourHeight = this.transform.position.y;
 
         AddVectorObs(positionOfBall);
-        AddVectorObs(heightOfOpponent);
+        //AddVectorObs(heightOfOpponent);
         AddVectorObs(ourHeight);
+    }
+
+    public override float[] Heuristic()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            return new float[] { 1 };
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            return new float[] { 2 };
+        }
+        return new float[] { 0 };
     }
 }
