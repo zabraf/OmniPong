@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class GameController : MonoBehaviour
     public Vector2 bottomRight;
     public Text Score1;
     public Text Score2;
+    public Text VictoryText;
 
+
+    public bool training;
     public PaddleAgent AIAgent1;
     public PaddleAgent AIAgent2;
 
@@ -28,6 +32,13 @@ public class GameController : MonoBehaviour
         ballRigidbody2D = Ball.GetComponent<Rigidbody2D>();
         ResetWorld();
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 
     /// <summary>
     /// Setup world dynamically based on the camera's view
@@ -37,6 +48,7 @@ public class GameController : MonoBehaviour
         ResetPlayers();
         ResetBall();
         StartCoroutine("LaunchBall", 1);
+        VictoryText.text += "";
     }
 
     /// <summary>
@@ -108,20 +120,54 @@ public class GameController : MonoBehaviour
             scoreLeft++;
             AIAgent1?.AddReward(-1);
             AIAgent1?.Done();
-            AIAgent2?.AddReward(1);
             AIAgent2?.Done();
             Score1.text = scoreLeft.ToString();
-            ResetWorld();
+
+            if (scoreLeft > 9 && !training)
+            {
+                Destroy(Ball);
+                StartCoroutine("Victory", "PLAYER 1 WON");
+            }
+            else
+            {
+                ResetWorld();
+            }
+            
         }
         else
         {
             scoreRight++;
-            AIAgent1?.AddReward(1);
             AIAgent1?.Done();
             AIAgent2?.AddReward(-1);
             AIAgent2?.Done();
             Score2.text = scoreRight.ToString();
-            ResetWorld();
+
+            if (scoreRight > 9 && !training)
+            {
+                Destroy(Ball);
+                StartCoroutine("Victory", "PLAYER 2 WON");
+            }
+            else
+            {
+                ResetWorld();
+            }
+            
         }
+    }
+    public IEnumerator Victory(string text)
+    {
+        StartCoroutine("TextWrite", text);
+        yield return new WaitForSeconds(3.5F);
+        SceneManager.LoadScene("Menu");
+    }
+    public IEnumerator TextWrite(string text)
+    {
+        foreach (char c in text)
+        {
+            VictoryText.text += c;
+            yield return new WaitForSeconds(0.125f);
+        }
+        yield return new WaitForSeconds(1);
+        VictoryText.text = "";
     }
 }

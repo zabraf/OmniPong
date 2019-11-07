@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MLPlayer : MonoBehaviour
 {
+    public Camera cam;
     public bool useControls = false;
     public KeyCode keyUp = KeyCode.W;
     public KeyCode keyDown = KeyCode.S;
@@ -32,8 +33,17 @@ public class MLPlayer : MonoBehaviour
             else
                 movingDirection = 0;
         }
-
+        float f = cam.ScreenToWorldPoint(new Vector3(0, 0, -10)).y;
+        float Y = transform.position.y + GetComponent<SpriteRenderer>().bounds.size.y / 2;
         //change speed by multiplying by moving direction
+        if (movingDirection == 1 && transform.position.y + GetComponent<SpriteRenderer>().bounds.size.y / 2 > cam.ScreenToWorldPoint(new Vector3(0,cam.pixelHeight,-10)).y)
+        {
+            movingDirection = 0;
+        }
+        if (movingDirection == -1 && transform.position.y - GetComponent<SpriteRenderer>().bounds.size.y / 2 < cam.ScreenToWorldPoint(new Vector3(0, 0, -10)).y)
+        {
+            movingDirection = 0;
+        }
         rb.velocity = new Vector2(0, speed * movingDirection);
     }
 }
