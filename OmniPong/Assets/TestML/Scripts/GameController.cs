@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GameController : MonoBehaviour
     public GameObject WallBot;
     public GameObject WallRight;
     public GameObject WallLeft;
+    public Text Score1;
+    public Text Score2;
 
     public int scoreLeft = 0;
     public int scoreRight = 0;
@@ -123,11 +126,13 @@ public class GameController : MonoBehaviour
         if(paddle == PaddleJ1)
         {
             scoreLeft++;
+            Score1.text = scoreLeft.ToString();
             ResetWorld();
         }
         else if(paddle == PaddleJ2)
         {
             ResetWorld();
+            Score2.text = scoreRight.ToString();
             scoreRight++;
         }
     }
