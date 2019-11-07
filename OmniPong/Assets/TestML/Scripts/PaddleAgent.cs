@@ -35,7 +35,7 @@ public class PaddleAgent : Agent
         float heightOfOpponent = Opponent.transform.position.y;
         float ourHeight = this.transform.position.y;
 
-        AddVectorObs(positionOfBall);
+        AddVectorObs(positionOfBall.y);
         //AddVectorObs(heightOfOpponent);
         AddVectorObs(ourHeight);
     }

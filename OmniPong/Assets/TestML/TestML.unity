@@ -943,7 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 3
+    vectorObservationSize: 2
     numStackedVectorObservations: 1
     vectorActionSize: 03000000
     vectorActionDescriptions: []
@@ -951,7 +951,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
-  m_BehaviorName: PaddleBrain
+  m_BehaviorName: PaddleBrain1
 --- !u!1 &1218580271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 3
+    vectorObservationSize: 2
     numStackedVectorObservations: 1
     vectorActionSize: 03000000
     vectorActionDescriptions: []
@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
-  m_BehaviorName: PaddleBrain
+  m_BehaviorName: PaddleBrain2
 --- !u!1 &1559851989
 GameObject:
   m_ObjectHideFlags: 0

@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
         if (leftSideScored)
         {
             scoreLeft++;
-            AIAgent1?.AddReward(-1);
+            AIAgent2?.AddReward(-1);
             AIAgent1?.Done();
             AIAgent2?.Done();
             Score1.text = scoreLeft.ToString();
@@ -137,8 +137,8 @@ public class GameController : MonoBehaviour
         else
         {
             scoreRight++;
+            AIAgent1?.AddReward(-1);
             AIAgent1?.Done();
-            AIAgent2?.AddReward(-1);
             AIAgent2?.Done();
             Score2.text = scoreRight.ToString();
 
