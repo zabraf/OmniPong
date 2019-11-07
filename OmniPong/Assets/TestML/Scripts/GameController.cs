@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject WallLeft;
     public Text Score1;
     public Text Score2;
+    public Text VictoryText;
 
     public PaddleAgent AIAgent;
 
@@ -28,6 +30,13 @@ public class GameController : MonoBehaviour
     {
         ballRigidbody2D = Ball.GetComponent<Rigidbody2D>();
         ResetWorld();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     /// <summary>
@@ -53,8 +62,8 @@ public class GameController : MonoBehaviour
         WallBot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, 0));
         WallBot.transform.localScale = new Vector3(Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0)).x * 7, 0.1F, 1);
         WallBot.transform.position = new Vector3(WallBot.transform.position.x, WallBot.transform.position.y - WallBot.GetComponent<SpriteRenderer>().bounds.size.y / 2, 10);
-
         StartCoroutine("LaunchBall", 1);
+        VictoryText.text += "";
     }
 
     /// <summary>
@@ -129,15 +138,49 @@ public class GameController : MonoBehaviour
             scoreLeft++;
             AIAgent?.AddReward(-1);
             Score1.text = scoreLeft.ToString();
-            ResetWorld();
+            if (scoreLeft > 9)
+            {
+                Destroy(Ball);
+                StartCoroutine("Victory", "PLAYER 1 WON");
+            }
+            else
+            {
+                ResetWorld();
+            }
+            
         }
         else if (goal == WallLeft)
         {
-            
+
             scoreRight++;
             AIAgent?.AddReward(1);
             Score2.text = scoreRight.ToString();
-            ResetWorld();
+            if (scoreRight > 9)
+            {
+                Destroy(Ball);
+                StartCoroutine("Victory", "PLAYER 2 WON");
+            }
+            else
+            {
+                ResetWorld();
+            }
+            
         }
+    }
+    public IEnumerator Victory(string text)
+    {
+        StartCoroutine("TextWrite", text);
+        yield return new WaitForSeconds(3.5F);
+        SceneManager.LoadScene("Menu");
+    }
+    public IEnumerator TextWrite(string text)
+    {
+        foreach (char c in text)
+        {
+            VictoryText.text += c;
+            yield return new WaitForSeconds(0.125f);
+        }
+        yield return new WaitForSeconds(1);
+        VictoryText.text = "";
     }
 }
