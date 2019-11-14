@@ -55,7 +55,7 @@ public class MLBall : MonoBehaviour
                     newVelocity = new Vector2(newVelocity.x + (ballPos.x - paddleCenter.x), newVelocity.y + (ballPos.y - paddleCenter.y));
                     //Add a reward to the AI if he hit the ball
                     PaddleAgent agent = col.gameObject.GetComponent<PaddleAgent>();
-                    agent?.AddReward(0.5f);
+                    agent?.AddReward(5f);
                 }
                 else
                 {
@@ -75,13 +75,19 @@ public class MLBall : MonoBehaviour
                     newVelocity = new Vector2(newVelocity.x + (ballPos.x - paddleCenter.x), newVelocity.y + (ballPos.y - paddleCenter.y));
                     //Add a reward to the AI if he hit the ball
                     PaddleAgent agent = col.gameObject.GetComponent<PaddleAgent>();
-                    agent?.AddReward(0.5f);
+                    agent?.AddReward(5f);
                 }
                 else
                 {
                     //Inverse the y direction to have some visual feedback
                     newVelocity.y = -newVelocity.y;
                 }
+            }
+
+            //do not allow the ball to be static
+            if(newVelocity.x < 0.2f && newVelocity.x > -0.2f)
+            {
+                newVelocity.x = velocity.x;
             }
 
             //apply the new velocity

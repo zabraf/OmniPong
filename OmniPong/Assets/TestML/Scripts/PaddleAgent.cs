@@ -32,10 +32,12 @@ public class PaddleAgent : Agent
         base.CollectObservations();
 
         Vector2 positionOfBall = Ball.transform.position;
+        Vector2 speedOfBall = Ball.GetComponent<Rigidbody2D>().velocity;
         float heightOfOpponent = Opponent.transform.position.y;
         float ourHeight = this.transform.position.y;
 
-        AddVectorObs(positionOfBall.y);
+        AddVectorObs(positionOfBall);
+        AddVectorObs(speedOfBall);
         //AddVectorObs(heightOfOpponent);
         AddVectorObs(ourHeight);
     }

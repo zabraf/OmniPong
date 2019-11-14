@@ -153,8 +153,8 @@ MonoBehaviour:
   PaddleJ1: {fileID: 1201394248}
   PaddleJ2: {fileID: 1218580271}
   Ball: {fileID: 843719132}
-  topLeft: {x: -15, y: 8.5}
-  bottomRight: {x: 15, y: -8.5}
+  topLeft: {x: -14.5, y: 8.5}
+  bottomRight: {x: 14.5, y: -8.5}
   Score1: {fileID: 2019394604}
   Score2: {fileID: 689650294}
   VictoryText: {fileID: 272292875}
@@ -689,7 +689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843719132}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2170725, y: 2.5663695, z: -5.2651215}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.049507923, y: 0.049507923, z: 0.049507923}
   m_Children: []
   m_Father: {fileID: 185486402}
@@ -905,7 +905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201394248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.5, y: 0, z: -5.2651215}
+  m_LocalPosition: {x: -14.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 185486402}
@@ -943,8 +943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 2
-    numStackedVectorObservations: 1
+    vectorObservationSize: 5
+    numStackedVectorObservations: 2
     vectorActionSize: 03000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
@@ -1078,7 +1078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218580271}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.5, y: 0, z: -5.2651215}
+  m_LocalPosition: {x: 14.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 185486402}
@@ -1134,8 +1134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 2
-    numStackedVectorObservations: 1
+    vectorObservationSize: 5
+    numStackedVectorObservations: 2
     vectorActionSize: 03000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0

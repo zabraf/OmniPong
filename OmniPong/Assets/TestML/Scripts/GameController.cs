@@ -38,6 +38,86 @@ public class GameController : MonoBehaviour
         {
             Application.Quit();
         }
+
+        List<Vector2> rayPoints = new List<Vector2>();
+        rayPoints.Add(this.Ball.transform.position);
+        Vector2 ballPos = this.Ball.transform.position;
+        Vector2 rayhitPoint = this.Ball.transform.position;
+        Vector2 ballVelocity = this.Ball.GetComponent<Rigidbody2D>().velocity;
+
+        if (ballVelocity != Vector2.zero)
+        {
+            float slope = ballVelocity.y / ballVelocity.x;
+            
+            //see geogebra doc
+            //calculate the next points the ball will hit
+            while (rayhitPoint.x > topLeft.x && rayhitPoint.x < bottomRight.x && rayPoints.Count < 20)
+            {
+                float y;
+                float x;
+                float b = -(slope * rayhitPoint.x - rayhitPoint.y);
+                if (ballVelocity.y > 0)
+                {
+                    y = topLeft.y;
+                    x = (y - b) / slope;
+                }
+                else if(ballVelocity.y == 0)
+                {
+                    y = ballPos.y;
+
+                    if (ballVelocity.x > 0)
+                        x = bottomRight.x;
+                    else
+                        x = topLeft.x;
+                }
+                else
+                {
+                    y = bottomRight.y;
+                    x = (y - b) / slope;
+                }
+
+                if(x < topLeft.x)
+                {
+                    x = topLeft.x;
+                    y = slope * x + b;
+                }
+                else if(x > bottomRight.x)
+                {
+                    x = bottomRight.x;
+                    y = slope * x + b;
+                }
+
+                rayhitPoint = new Vector2(x,y);//add the velocity
+                
+                //inverse the slope for the next calculation
+                slope *= -1;
+                ballVelocity.y *= -1;
+
+                rayPoints.Add(rayhitPoint);
+            }
+
+            //draw the trajectory found
+            for (int i = 0; i < rayPoints.Count - 1; i++)
+            {
+                Debug.DrawLine(new Vector3(rayPoints[i].x, rayPoints[i].y), new Vector3(rayPoints[i + 1].x, rayPoints[i + 1].y), Color.red);
+            }
+
+            //if the ball is going left
+            if (ballVelocity.x < 0)
+            {
+                //score = negative distance to where the ball will be + Paddlesize/2 (Min 0) 
+                float score = -Vector2.Distance(PaddleJ1.transform.position, rayPoints[rayPoints.Count - 1]);
+                score += PaddleJ1.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+                AIAgent1?.AddReward(score);
+            }
+            else
+            {
+                //score = negative distance to where the ball will be + Paddlesize/2 (Min 0) 
+                float score = -Vector2.Distance(PaddleJ2.transform.position, rayPoints[rayPoints.Count - 1]);
+                score += PaddleJ2.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+                AIAgent2?.AddReward(score);
+            }
+        }
     }
 
     /// <summary>
@@ -78,36 +158,21 @@ public class GameController : MonoBehaviour
     public IEnumerator LaunchBall(float delay)
     {
         //find an angle that is not directly up or down
-        float angle;
-        int rdm = UnityEngine.Random.Range(0,6);
-        switch (rdm)
+        float angle = 0;
+        float maxAngle = 90;
+        int side = UnityEngine.Random.Range(0, 2);
+
+        while(angle == 180 || angle == 0)
         {
-            case 0:
-                angle = 0;
-                break;
-            case 1:
-                angle = 45;
-                break;
-            case 2:
-                angle = 135;
-                break;
-            case 3:
-                angle = 180;
-                break;
-            case 4:
-                angle = 225;
-                break;
-            case 5:
-                angle = 315;
-                break;
-            default:
-                throw new Exception("Wrong RDM");
+            angle = UnityEngine.Random.Range(0, maxAngle);
+            angle += (side == 0) ? 135 : -45 ;
         }
         //wait for delay
         yield return new WaitForSeconds(delay);
 
         //apply new speed
-        ballRigidbody2D.velocity = new Vector2(Mathf.Cos(angle) * ballStartSpeed, Mathf.Sin(angle) * ballStartSpeed);
+        ballRigidbody2D.velocity = new Vector2(Mathf.Cos(angle *Mathf.Deg2Rad) * ballStartSpeed, Mathf.Sin(angle * Mathf.Deg2Rad) * ballStartSpeed);
+        
     }
 
     /// <summary>
@@ -118,9 +183,6 @@ public class GameController : MonoBehaviour
         if (leftSideScored)
         {
             scoreLeft++;
-            AIAgent2?.AddReward(-1);
-            AIAgent1?.Done();
-            AIAgent2?.Done();
             Score1.text = scoreLeft.ToString();
 
             if (scoreLeft > 9 && !training)
@@ -132,14 +194,10 @@ public class GameController : MonoBehaviour
             {
                 ResetWorld();
             }
-            
         }
         else
         {
             scoreRight++;
-            AIAgent1?.AddReward(-1);
-            AIAgent1?.Done();
-            AIAgent2?.Done();
             Score2.text = scoreRight.ToString();
 
             if (scoreRight > 9 && !training)
@@ -151,8 +209,9 @@ public class GameController : MonoBehaviour
             {
                 ResetWorld();
             }
-            
         }
+        AIAgent1?.Done();
+        AIAgent2?.Done();
     }
     public IEnumerator Victory(string text)
     {
