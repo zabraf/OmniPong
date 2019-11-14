@@ -6,19 +6,32 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public GameObject Selector;
+    public GameObject Selector2;
     public Text PVA;
     public Text PVP;
+    public Text LVL1;
+    public Text LVL2;
+    public Text LVL3;
+    private int level;
 
-    private bool isPVASelected;
+
+    private Selection selected;
     // Start is called before the first frame update
     void Start()
     {
-        Selector.transform.position = new Vector2(-4.17f, PVA.transform.position.y); 
+        Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y); 
         StartCoroutine("Blink");
-        isPVASelected = true;
-
+        selected = Selection.PVP;
+        level = 1;
     }
-
+    enum Selection
+    {
+        PVP,
+        PVA,
+        PVS1,
+        PVS2,
+        PVS3
+    }
     // Update is called once per frame
     void Update()
     {
@@ -26,32 +39,71 @@ public class Menu : MonoBehaviour
         {
             Application.Quit();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha8) || Input.GetKeyDown(KeyCode.Return))
+        switch (selected)
         {
-            if(isPVASelected)
-            {
-                //launche scene PVA
-            }
-            else
-            {
-                //launch scene PVP
-            }
-        }
-        if(isPVASelected)
-        {
-            if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                isPVASelected = false;
-                Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y);
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                isPVASelected = true;
-                Selector.transform.position = new Vector2(-4.17f, PVA.transform.position.y);
-            }
+            case Selection.PVP:
+                if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    selected = Selection.PVA;
+                    Selector.transform.position = new Vector2(-4.17f, PVA.transform.position.y + 0.05f);
+                }
+                break;
+            case Selection.PVA:
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    selected = Selection.PVP;
+                    Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y + +0.05f);
+                }
+                if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    selected = Selection.PVS1;
+                    Selector2.transform.position = new Vector2(-3.19f, LVL1.transform.position.y + 0.05f);
+                    Selector2.SetActive(true);
+                    Selector.SetActive(true);
+                }
+                break;
+            case Selection.PVS1:
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    selected = Selection.PVA;
+                    Selector2.SetActive(false);
+                    level = 0;
+                }
+                if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    selected = Selection.PVS2;
+                    Selector2.transform.position = new Vector2(-3.19f, LVL2.transform.position.y + 0.05f);
+                    Selector2.SetActive(true);
+                    level = 1;
+                }
+                break;
+            case Selection.PVS2:
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    selected = Selection.PVS1;
+                    Selector2.transform.position = new Vector2(-3.19f, LVL1.transform.position.y + 0.05f);
+                    Selector2.SetActive(true);
+                    level = 2;
+                }
+                if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    selected = Selection.PVS3;
+                    Selector2.transform.position = new Vector2(-3.19f, LVL3.transform.position.y + 0.05f);
+                    Selector2.SetActive(true);
+                    level = 3;
+                }
+                break;
+            case Selection.PVS3:
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    selected = Selection.PVS2;
+                    Selector2.transform.position = new Vector2(-3.19f, LVL2.transform.position.y + 0.05f);
+                    Selector2.SetActive(true);
+                    level = 2;
+                }
+                break;
+            default:
+                break;
         }
     }
     public IEnumerator Blink()
@@ -60,13 +112,30 @@ public class Menu : MonoBehaviour
         {
             if (Selector.activeSelf)
             {
-                Selector.SetActive(false);
+              
+                if(selected == Selection.PVS1 || selected == Selection.PVS2 || selected == Selection.PVS3)
+                {
+                    Selector2.SetActive(false);
+                }
+                else
+                {
+                    Selector.SetActive(false);
+                }
+
             }
             else
             {
-                Selector.SetActive(true);
+               
+                if (selected == Selection.PVS1 || selected == Selection.PVS2 || selected == Selection.PVS3)
+                {
+                    Selector2.SetActive(true);
+                }else
+                {
+                    Selector.SetActive(true);
+                }
+
             }
-            yield return new WaitForSeconds(0.5F);
+                yield return new WaitForSeconds(0.5F);
         }
         
     }
