@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("Menu");
         }
 
         List<Vector2> rayPoints = new List<Vector2>();
@@ -215,9 +215,27 @@ public class GameController : MonoBehaviour
     }
     public IEnumerator Victory(string text)
     {
+        int nextLevel = PlayerPrefs.GetInt("Level") + 1;
         StartCoroutine("TextWrite", text);
-        yield return new WaitForSeconds(3.5F);
-        SceneManager.LoadScene("Menu");
+        yield return new WaitForSeconds(3);
+        if(PlayerPrefs.GetInt("Switch") == 1)
+        {
+            if(nextLevel < 3)
+            { 
+                PlayerPrefs.SetInt("Level", nextLevel);
+                SceneManager.LoadScene("Level" + nextLevel);
+            }
+            else
+            {
+                SceneManager.LoadScene("Menu");
+            }
+
+        }
+        else
+        {
+            SceneManager.LoadScene("Level" + (nextLevel - 1));
+        }
+     
     }
     public IEnumerator TextWrite(string text)
     {

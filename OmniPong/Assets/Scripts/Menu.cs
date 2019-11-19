@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class Menu : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y); 
+        Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y);
         StartCoroutine("Blink");
         selected = Selection.PVP;
         level = 1;
@@ -47,6 +49,10 @@ public class Menu : MonoBehaviour
                     selected = Selection.PVA;
                     Selector.transform.position = new Vector2(-4.17f, PVA.transform.position.y + 0.05f);
                 }
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
+                {
+                    SceneManager.LoadScene("PVP");
+                }
                 break;
             case Selection.PVA:
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -60,6 +66,13 @@ public class Menu : MonoBehaviour
                     Selector2.transform.position = new Vector2(-3.19f, LVL1.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
                     Selector.SetActive(true);
+                }
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
+                {
+                    PlayerPrefs.SetInt("Switch", 1);
+                    PlayerPrefs.SetInt("Level", 1);
+                    SceneManager.LoadScene("Level1");
+                    
                 }
                 break;
             case Selection.PVS1:
@@ -75,6 +88,13 @@ public class Menu : MonoBehaviour
                     Selector2.transform.position = new Vector2(-3.19f, LVL2.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
                     level = 1;
+                }
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
+                {
+                    PlayerPrefs.SetInt("Switch", 0);
+                    PlayerPrefs.SetInt("Level", 1);
+                    SceneManager.LoadScene("Level1");
+                    
                 }
                 break;
             case Selection.PVS2:
@@ -92,6 +112,13 @@ public class Menu : MonoBehaviour
                     Selector2.SetActive(true);
                     level = 3;
                 }
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
+                {
+                    PlayerPrefs.SetInt("Switch", 0);
+                    PlayerPrefs.SetInt("Level", 2);
+                    SceneManager.LoadScene("Level2");
+                    
+                }
                 break;
             case Selection.PVS3:
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -101,42 +128,47 @@ public class Menu : MonoBehaviour
                     Selector2.SetActive(true);
                     level = 2;
                 }
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
+                {
+                    PlayerPrefs.SetInt("Switch", 0);
+                    PlayerPrefs.SetInt("Level", 3);
+                    SceneManager.LoadScene("Level3");
+                    
+                }
                 break;
             default:
                 break;
         }
+
     }
     public IEnumerator Blink()
     {
         while (true)
         {
-            if (Selector.activeSelf)
+            if (selected == Selection.PVS1 || selected == Selection.PVS2 || selected == Selection.PVS3)
             {
-              
-                if(selected == Selection.PVS1 || selected == Selection.PVS2 || selected == Selection.PVS3)
+                if (Selector2.activeSelf)
                 {
                     Selector2.SetActive(false);
                 }
                 else
                 {
-                    Selector.SetActive(false);
+                    Selector2.SetActive(true);
                 }
-
             }
             else
             {
-               
-                if (selected == Selection.PVS1 || selected == Selection.PVS2 || selected == Selection.PVS3)
+                if (Selector.activeSelf)
                 {
-                    Selector2.SetActive(true);
-                }else
-                {
+                    Selector.SetActive(false);
+                }
+                else
+                { 
                     Selector.SetActive(true);
                 }
-
             }
-                yield return new WaitForSeconds(0.5F);
+            yield return new WaitForSeconds(0.5F);
         }
-        
+
     }
 }

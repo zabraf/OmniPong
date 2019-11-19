@@ -44,14 +44,7 @@ public class PaddleAgent : Agent
 
     public override float[] Heuristic()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            return new float[] { 1 };
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            return new float[] { 2 };
-        }
-        return new float[] { 0 };
+
+        return base.Heuristic();
     }
 }
