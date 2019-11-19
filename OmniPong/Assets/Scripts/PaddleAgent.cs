@@ -13,17 +13,20 @@ public class PaddleAgent : Agent
     {
         base.AgentAction(vectorAction, textAction);
 
-        if(vectorAction[0] == 1)
+        if (vectorAction.Length > 0)
         {
-            this.gameObject.GetComponent<MLPlayer>().movingDirection = 1;
-        }
-        else if(vectorAction[0] == 2)
-        {
-            this.gameObject.GetComponent<MLPlayer>().movingDirection = -1;
-        }
-        else
-        {
-            this.gameObject.GetComponent<MLPlayer>().movingDirection = 0;
+            if (vectorAction[0] == 1)
+            {
+                this.gameObject.GetComponent<MLPlayer>().movingDirection = 1;
+            }
+            else if (vectorAction[0] == 2)
+            {
+                this.gameObject.GetComponent<MLPlayer>().movingDirection = -1;
+            }
+            else
+            {
+                this.gameObject.GetComponent<MLPlayer>().movingDirection = 0;
+            }
         }
     }
 
@@ -44,7 +47,6 @@ public class PaddleAgent : Agent
 
     public override float[] Heuristic()
     {
-
-        return base.Heuristic();
+        return new float[0];
     }
 }

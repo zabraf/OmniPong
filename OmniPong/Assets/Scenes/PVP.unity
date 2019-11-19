@@ -158,9 +158,10 @@ MonoBehaviour:
   Score1: {fileID: 2019394604}
   Score2: {fileID: 689650294}
   VictoryText: {fileID: 272292875}
-  training: 1
-  AIAgent1: {fileID: 1201394254}
-  AIAgent2: {fileID: 1218580276}
+  scoreToWin: 0
+  training: 0
+  AIAgent1: {fileID: 0}
+  AIAgent2: {fileID: 0}
   scoreLeft: 0
   scoreRight: 0
   ballStartSpeed: 5
@@ -717,8 +718,6 @@ GameObject:
   - component: {fileID: 1201394251}
   - component: {fileID: 1201394250}
   - component: {fileID: 1201394249}
-  - component: {fileID: 1201394255}
-  - component: {fileID: 1201394254}
   m_Layer: 0
   m_Name: PaddleJ1
   m_TagString: Player
@@ -854,47 +853,6 @@ Transform:
   m_Father: {fileID: 185486402}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1201394254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1201394248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c43b326c1f3cb4592a0cbabf779e51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-    resetOnDone: 1
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
-  Ball: {fileID: 843719132}
-  Opponent: {fileID: 1218580271}
---- !u!114 &1201394255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1201394248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    vectorObservationSize: 5
-    numStackedVectorObservations: 2
-    vectorActionSize: 03000000
-    vectorActionDescriptions: []
-    vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_UseHeuristic: 0
-  m_BehaviorName: PaddleBrain1
 --- !u!1 &1218580271
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,8 +866,6 @@ GameObject:
   - component: {fileID: 1218580273}
   - component: {fileID: 1218580272}
   - component: {fileID: 1218580277}
-  - component: {fileID: 1218580278}
-  - component: {fileID: 1218580276}
   m_Layer: 0
   m_Name: PaddleJ2
   m_TagString: Player
@@ -1027,25 +983,6 @@ Transform:
   m_Father: {fileID: 185486402}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1218580276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218580271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c43b326c1f3cb4592a0cbabf779e51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-    resetOnDone: 1
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
-  Ball: {fileID: 843719132}
-  Opponent: {fileID: 1201394248}
 --- !u!114 &1218580277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,28 +1001,6 @@ MonoBehaviour:
   keyDown: 274
   movingDirection: 0
   speed: 8
---- !u!114 &1218580278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218580271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    vectorObservationSize: 5
-    numStackedVectorObservations: 2
-    vectorActionSize: 03000000
-    vectorActionDescriptions: []
-    vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_UseHeuristic: 0
-  m_BehaviorName: PaddleBrain2
 --- !u!1 &1559851989
 GameObject:
   m_ObjectHideFlags: 0
