@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public Text Score1;
     public Text Score2;
     public Text VictoryText;
-
+    public int scoreToWin;
 
     public bool training;
     public PaddleAgent AIAgent1;
@@ -185,7 +185,7 @@ public class GameController : MonoBehaviour
             scoreLeft++;
             Score1.text = scoreLeft.ToString();
 
-            if (scoreLeft > 9 && !training)
+            if (scoreLeft > scoreToWin && !training)
             {
                 Destroy(Ball);
                 StartCoroutine("Victory", "PLAYER 1 WON");
@@ -200,7 +200,7 @@ public class GameController : MonoBehaviour
             scoreRight++;
             Score2.text = scoreRight.ToString();
 
-            if (scoreRight > 9 && !training)
+            if (scoreRight > scoreToWin && !training)
             {
                 Destroy(Ball);
                 StartCoroutine("Victory", "PLAYER 2 WON");
@@ -217,10 +217,13 @@ public class GameController : MonoBehaviour
     {
         int nextLevel = PlayerPrefs.GetInt("Level") + 1;
         StartCoroutine("TextWrite", text);
+        Debug.Log(PlayerPrefs.GetInt("Switch"));
+        Debug.Log(nextLevel);
         yield return new WaitForSeconds(3);
+        
         if(PlayerPrefs.GetInt("Switch") == 1)
         {
-            if(nextLevel < 3)
+            if(nextLevel <= 3)
             { 
                 PlayerPrefs.SetInt("Level", nextLevel);
                 SceneManager.LoadScene("Level" + nextLevel);
@@ -229,13 +232,11 @@ public class GameController : MonoBehaviour
             {
                 SceneManager.LoadScene("Menu");
             }
-
         }
         else
         {
             SceneManager.LoadScene("Level" + (nextLevel - 1));
         }
-     
     }
     public IEnumerator TextWrite(string text)
     {

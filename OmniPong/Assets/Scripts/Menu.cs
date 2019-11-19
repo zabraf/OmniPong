@@ -72,7 +72,6 @@ public class Menu : MonoBehaviour
                     PlayerPrefs.SetInt("Switch", 1);
                     PlayerPrefs.SetInt("Level", 1);
                     SceneManager.LoadScene("Level1");
-                    
                 }
                 break;
             case Selection.PVS1:
