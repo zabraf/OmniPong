@@ -8,7 +8,6 @@ public class PaddleAgent : Agent
     public GameObject Ball;
     public GameObject Opponent;
 
-
     public override void AgentAction(float[] vectorAction, string textAction)
     {
         base.AgentAction(vectorAction, textAction);
