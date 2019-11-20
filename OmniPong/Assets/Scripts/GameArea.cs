@@ -10,6 +10,5 @@ public class GameArea : Area
     {
         base.ResetArea();
 
-        gameController.ResetWorld();
     }
 }
