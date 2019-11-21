@@ -13,6 +13,7 @@ public class MLBallL3: MonoBehaviour
     
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         rb = GetComponent<Rigidbody2D>();
     }
 

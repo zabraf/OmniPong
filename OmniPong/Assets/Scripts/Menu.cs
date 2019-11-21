@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y);
         StartCoroutine("Blink");
         selected = Selection.PVP;

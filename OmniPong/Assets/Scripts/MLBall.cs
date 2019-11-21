@@ -12,6 +12,7 @@ public class MLBall : MonoBehaviour
     public AudioSource effect;
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         rb = GetComponent<Rigidbody2D>();
     }
 
