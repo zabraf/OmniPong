@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     public Text LVL1;
     public Text LVL2;
     public Text LVL3;
+    public AudioSource audio;
 
 
     private Selection selected;
@@ -44,22 +45,26 @@ public class Menu : MonoBehaviour
             case Selection.PVP:
                 if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVA;
                     Selector.transform.position = new Vector2(-4.17f, PVA.transform.position.y + 0.05f);
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
+                    audio.Play();
                     SceneManager.LoadScene("PVP");
                 }
                 break;
             case Selection.PVA:
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVP;
                     Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y + +0.05f);
                 }
                 if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVS1;
                     Selector2.transform.position = new Vector2(-3.19f, LVL1.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
@@ -67,6 +72,7 @@ public class Menu : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
+                    audio.Play();
                     PlayerPrefs.SetInt("Switch", 1);
                     PlayerPrefs.SetInt("Level", 1);
                     SceneManager.LoadScene("Level1");
@@ -75,17 +81,20 @@ public class Menu : MonoBehaviour
             case Selection.PVS1:
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVA;
                     Selector2.SetActive(false);
                 }
                 if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVS2;
                     Selector2.transform.position = new Vector2(-3.19f, LVL2.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
+                    audio.Play();
                     PlayerPrefs.SetInt("Switch", 0);
                     PlayerPrefs.SetInt("Level", 1);
                     SceneManager.LoadScene("Level1");
@@ -95,18 +104,21 @@ public class Menu : MonoBehaviour
             case Selection.PVS2:
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVS1;
                     Selector2.transform.position = new Vector2(-3.19f, LVL1.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVS3;
                     Selector2.transform.position = new Vector2(-3.19f, LVL3.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
+                    audio.Play();
                     PlayerPrefs.SetInt("Switch", 0);
                     PlayerPrefs.SetInt("Level", 2);
                     SceneManager.LoadScene("Level2");
@@ -116,12 +128,14 @@ public class Menu : MonoBehaviour
             case Selection.PVS3:
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    audio.Play();
                     selected = Selection.PVS2;
                     Selector2.transform.position = new Vector2(-3.19f, LVL2.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
+                    audio.Play();
                     PlayerPrefs.SetInt("Switch", 0);
                     PlayerPrefs.SetInt("Level", 3);
                     SceneManager.LoadScene("Level3");
