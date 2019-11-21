@@ -9,7 +9,7 @@ public class MLBall : MonoBehaviour
     public float speedIncrease = 2.5f;
     //used to keep the data of velocity before collision
     private Vector2 velocity;
-    
+    public AudioSource effect;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,14 +21,17 @@ public class MLBall : MonoBehaviour
 
         if(this.transform.position.y > gameController.topLeft.y || this.transform.position.y < gameController.bottomRight.y)
         {
+            effect.Play();
             rb.velocity = new Vector2(velocity.x, -velocity.y);
         }
         else if (this.transform.position.x > gameController.bottomRight.x)
         {
+            effect.Play();
             gameController.ScoreGoal(true);
         }
         else if (this.transform.position.x < gameController.topLeft.x)
         {
+            effect.Play();
             gameController.ScoreGoal(false);
         }
     }
@@ -38,6 +41,7 @@ public class MLBall : MonoBehaviour
         //if we hit a players
         if(col.gameObject.tag == "Player")
         {
+            effect.Play();
             Vector2 newVelocity = velocity;
             Vector2 ballPos = rb.transform.position;
             Vector2 paddleCenter = col.transform.position;
