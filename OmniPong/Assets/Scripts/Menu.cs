@@ -14,7 +14,6 @@ public class Menu : MonoBehaviour
     public Text LVL1;
     public Text LVL2;
     public Text LVL3;
-    private int level;
 
 
     private Selection selected;
@@ -24,7 +23,6 @@ public class Menu : MonoBehaviour
         Selector.transform.position = new Vector2(-4.17f, PVP.transform.position.y);
         StartCoroutine("Blink");
         selected = Selection.PVP;
-        level = 1;
     }
     enum Selection
     {
@@ -79,14 +77,12 @@ public class Menu : MonoBehaviour
                 {
                     selected = Selection.PVA;
                     Selector2.SetActive(false);
-                    level = 0;
                 }
                 if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     selected = Selection.PVS2;
                     Selector2.transform.position = new Vector2(-3.19f, LVL2.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
-                    level = 1;
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
@@ -102,14 +98,12 @@ public class Menu : MonoBehaviour
                     selected = Selection.PVS1;
                     Selector2.transform.position = new Vector2(-3.19f, LVL1.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
-                    level = 2;
                 }
                 if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     selected = Selection.PVS3;
                     Selector2.transform.position = new Vector2(-3.19f, LVL3.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
-                    level = 3;
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
@@ -125,7 +119,6 @@ public class Menu : MonoBehaviour
                     selected = Selection.PVS2;
                     Selector2.transform.position = new Vector2(-3.19f, LVL2.transform.position.y + 0.05f);
                     Selector2.SetActive(true);
-                    level = 2;
                 }
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Alpha8))
                 {
