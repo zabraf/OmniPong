@@ -129,8 +129,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 185486402}
-  - component: {fileID: 185486401}
   - component: {fileID: 185486403}
+  - component: {fileID: 185486404}
   m_Layer: 0
   m_Name: GameArea
   m_TagString: Untagged
@@ -138,32 +138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &185486401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185486400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74fbc076785f26047b98407e9481e75c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PaddleJ1: {fileID: 1201394248}
-  PaddleJ2: {fileID: 1218580271}
-  Ball: {fileID: 843719132}
-  topLeft: {x: -14.5, y: 8.5}
-  bottomRight: {x: 14.5, y: -8.5}
-  Score1: {fileID: 2019394604}
-  Score2: {fileID: 689650294}
-  VictoryText: {fileID: 272292875}
-  training: 0
-  AIAgent1: {fileID: 1201394254}
-  AIAgent2: {fileID: 1218580276}
-  scoreLeft: 0
-  scoreRight: 0
-  ballStartSpeed: 5
 --- !u!4 &185486402
 Transform:
   m_ObjectHideFlags: 0
@@ -193,7 +167,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5921328ba2c42844aad656fa9e43fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 185486401}
+  gameController: {fileID: 0}
+--- !u!114 &185486404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185486400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be67a98a1be97754a9a34a6fdebf5c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PaddleJ1: {fileID: 1201394248}
+  PaddleJ2: {fileID: 1218580271}
+  Ball: {fileID: 843719132}
+  topLeft: {x: -14.5, y: 8.5}
+  bottomRight: {x: 14.5, y: -8.5}
+  Score1: {fileID: 2019394604}
+  Score2: {fileID: 689650294}
+  VictoryText: {fileID: 272292875}
+  scoreToWin: 9
+  htba: 0
+  training: 0
+  AIAgent1: {fileID: 1201394254}
+  AIAgent2: {fileID: 1218580276}
+  scoreLeft: 0
+  scoreRight: 0
+  ballStartSpeed: 8
 --- !u!1 &272292873
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,10 +629,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 843719132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1809c85f8806774096dce501b73e853, type: 3}
+  m_Script: {fileID: 11500000, guid: 81b88a3f847a2b9408a49a45bf457037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 185486401}
+  gameController: {fileID: 185486404}
   speedIncrease: 0.5
 --- !u!212 &843719136
 SpriteRenderer:
@@ -773,7 +775,7 @@ GameObject:
   - component: {fileID: 1074280451}
   - component: {fileID: 1074280450}
   m_Layer: 5
-  m_Name: Score1 (1)
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -873,7 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
-  useControls: 0
+  useControls: 1
   keyUp: 119
   keyDown: 115
   movingDirection: 0
@@ -997,7 +999,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1201394248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c43b326c1f3cb4592a0cbabf779e51, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dc43dd5d0ce7004dbde48ab6f642184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
@@ -1006,7 +1008,7 @@ MonoBehaviour:
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
   Ball: {fileID: 843719132}
-  Opponent: {fileID: 1218580271}
+  gameController: {fileID: 185486404}
 --- !u!114 &1201394255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 5
+    vectorObservationSize: 2
     numStackedVectorObservations: 2
     vectorActionSize: 03000000
     vectorActionDescriptions: []
@@ -1170,7 +1172,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1218580271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c43b326c1f3cb4592a0cbabf779e51, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dc43dd5d0ce7004dbde48ab6f642184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
@@ -1179,7 +1181,7 @@ MonoBehaviour:
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
   Ball: {fileID: 843719132}
-  Opponent: {fileID: 1201394248}
+  gameController: {fileID: 185486404}
 --- !u!114 &1218580277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,12 +1213,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 5
+    vectorObservationSize: 2
     numStackedVectorObservations: 2
     vectorActionSize: 03000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: f13514bc9265e414e9379049383d2e3b, type: 3}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: PaddleBrain2
