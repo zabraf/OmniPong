@@ -195,7 +195,7 @@ MonoBehaviour:
   AIAgent2: {fileID: 1218580276}
   scoreLeft: 0
   scoreRight: 0
-  ballStartSpeed: 8
+  ballStartSpeed: 5
 --- !u!1 &272292873
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 185486404}
-  speedIncrease: 0.5
+  speedIncrease: 1
   effect: {fileID: 843719140}
 --- !u!212 &843719136
 SpriteRenderer:

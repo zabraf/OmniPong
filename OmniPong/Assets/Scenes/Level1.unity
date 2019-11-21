@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 185486404}
-  speedIncrease: 2.5
+  speedIncrease: 1
   effect: {fileID: 843719140}
 --- !u!212 &843719136
 SpriteRenderer:
