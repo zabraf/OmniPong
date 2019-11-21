@@ -188,7 +188,7 @@ MonoBehaviour:
   Score1: {fileID: 2019394604}
   Score2: {fileID: 689650294}
   VictoryText: {fileID: 272292875}
-  scoreToWin: 10
+  scoreToWin: 9
   training: 0
   AIAgent1: {fileID: 1201394254}
   AIAgent2: {fileID: 1218580276}
