@@ -188,8 +188,8 @@ MonoBehaviour:
   Score1: {fileID: 2019394604}
   Score2: {fileID: 689650294}
   VictoryText: {fileID: 272292875}
-  scoreToWin: 0
-  training: 1
+  scoreToWin: 10
+  training: 0
   AIAgent1: {fileID: 1201394254}
   AIAgent2: {fileID: 1218580276}
   scoreLeft: 0
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
-  useControls: 0
+  useControls: 1
   keyUp: 119
   keyDown: 115
   movingDirection: 0
